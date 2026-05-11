@@ -62,14 +62,11 @@ dropdownDeleteArtist.addEventListener("focus", async () => {
 });
 
 DeleteArtistbtn.addEventListener("click", async (event) => {
-  event.preventDefault();
   const name = dropdownDeleteArtist.value;
   if (!name) {
     artistOutput.textContent = "Selecciona un artista abans d'eliminar.";
     return;
   }
-
-  console.log(name);
   const res = await fetch("/api/RemoveArtist", {
     method: "POST",
     headers: {
@@ -116,8 +113,7 @@ loadSongbtn.addEventListener("click", async () =>{
 
 
 
-async function ConsultTable(tableString, campString) {
-
+async function ConsultTable(tableString, campString) {// Consulta de qualsevol taula  amb una columna de forma simple (SENSE JOINs, sense WHERE, etc.)
   const res = await fetch("/api/consultDB", {
     method: "POST",
     headers: {
@@ -130,7 +126,7 @@ async function ConsultTable(tableString, campString) {
   return json.result;
 }
 
-async function LoadDeleteArtistDropdown() {
+async function LoadDeleteArtistDropdown() { // Recarregar el dropdown amb el artista eliminat.
   dropdownDeleteArtist.innerHTML = "";
   let result = await ConsultTable("artists", "name");
   result.forEach(artist => {
