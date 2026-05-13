@@ -261,8 +261,8 @@ app.post("/api/song", (req, res) => { // Funcio per retornar un json amb la canÃ
     INNER JOIN album ON song.id_album = album.id
     LEFT JOIN album_artist ON album.id = album_artist.id_album
     LEFT JOIN artists ON artists.id = album_artist.id_artists
-    GROUP BY album.id
-    ORDER BY album.id DESC `, (err, rows) => {
+    GROUP BY song.id
+    ORDER BY song.id DESC `, (err, rows) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
