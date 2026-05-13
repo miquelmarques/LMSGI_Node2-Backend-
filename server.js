@@ -15,9 +15,9 @@ const db = new sqlite3.Database(dbPath);
 
 // Creem la taula i ens assegurem que hi hagi dades inicials.
 db.serialize(() => {
-  db.run("DELETE FROM album");
-  db.run("DELETE FROM album_artist");
-  db.run("DELETE FROM song");
+  //db.run("DELETE FROM album");
+  //db.run("DELETE FROM album_artist");
+ // db.run("DELETE FROM song");
   db.run(`
     CREATE TABLE IF NOT EXISTS artists (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -275,3 +275,21 @@ app.listen(PORT, () => {
   console.log(`Servidor a http://localhost:${PORT}`);
   console.log(`Base de dades SQLite: ${dbPath}`);
 });
+/*
+app.post("/api/consultData", (req,res)=>{
+  const tableName = req.body.table;
+  const camp = req.body.camp;
+  const whereCamp = req.body.campWhere;
+  const valor = req.body.valor;
+
+  let sql = `SELECT ${camp} FROM  ${tableName} WHERE ${whereCamp} = ?`;
+
+  db.all(sql,[valor], (error, rows)=>{
+    if (error){
+      console.log(error);
+      res.status(500).type("text").send(`Error: ${error.message}`);
+      return;
+    } 
+    res.json({result: rows});
+  })
+})*/

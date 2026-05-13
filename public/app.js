@@ -1,6 +1,7 @@
 ﻿const form = document.getElementById("artist-form");
 const loadButton = document.getElementById("load-btn");
 const artistOutput = document.getElementById("artist-output");
+
 const dropdownDeleteArtist = document.getElementById("dropdownDeleteArtist");
 const DeleteArtistbtn = document.getElementById("delete-btn");
 const artistNameInput = document.getElementById("artist-name");
@@ -136,3 +137,40 @@ async function LoadDeleteArtistDropdown() { // Recarregar el dropdown amb el art
     dropdownDeleteArtist.appendChild(option);
   });
 }
+
+
+
+/*
+
+const dropdownAsix = document.getElementById("Asix1a");
+
+dropdownAsix.addEventListener("focus", async () => {
+  let artists = await CridaSelectBackend("artists","name", true, true);
+  artists.forEach(artist =>{
+    let opcio = document.createElement("option");
+    opcio.value = artist.name;
+    opcio.textContent = artist.name;
+    dropdownAsix.appendChild(opcio);
+  })
+  //Crido al backend i mostri artistes
+});
+
+async function CridaSelectBackend(table, camp, campWhere, valor){
+  const res = await fetch ("/api/consultData",{
+    method: "POST",
+    headers:{
+      "Content-type":"application/json"
+    },
+    body: JSON.stringify({table: table, camp: camp, campWhere: campWhere, valor: valor })
+  });
+  if(res.status == 200){
+    const json = await res.json();
+    return json.result;
+  } else {
+    const errorText = await res.text();
+    console.log(errorText);
+
+  }
+};
+
+*/
