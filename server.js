@@ -17,7 +17,7 @@ const db = new sqlite3.Database(dbPath);
 db.serialize(() => {
   //db.run("DELETE FROM album");
   //db.run("DELETE FROM album_artist");
- // db.run("DELETE FROM song");
+  // db.run("DELETE FROM song");
   db.run(`
     CREATE TABLE IF NOT EXISTS artists (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -232,6 +232,28 @@ app.post("/api/RemoveArtist", (req, res) => { //Eliminar un artista requereix es
   })
 
 
+});
+//Endpint de modificar el artista
+app.post("/api/modifyArtist", (req, res) => {
+  const oldName = req.body.old_name;
+  const newName = req.body.new_name;
+
+  if (!newName){
+    res.status(500).type("text").send(`Error falta el nom del nou artista`);
+    return;
+  }
+
+  db.run(
+    "UPDATE artists SET name = ? WHERE name = ?",
+    [newName, oldName],
+    (error) => {
+      if (error) {
+        res.status(500).type("text").send(`Error: ${error.message}`);
+        return;
+      }
+      res.status(200).type("text").send(`Artista modificat: ${oldName} a ${newName}`);
+    }
+  );
 });
 
 app.post("/api/album", (req, res) => {// Funcio per retornar un json amb la canço, del album x del artista y

@@ -1,72 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ca">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Node + SQLite3 (Artistes)</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <main>
-    <section class="card">
-      <h1>Exemple b�sic: SQLite3 amb Node</h1>
-      <p>Aquest exemple nom�s treballa amb artistes.</p>
-      <p>Si la base de dades est� buida, es creen dos artistes inicials.</p>
-    </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node + SQLite3 (Artistes)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <h1>Exemple b�sic: SQLite3 amb Node</h1>
+        <p>Aquest exemple nom�s treballa amb artistes.</p>
+        <p>Si la base de dades est� buida, es creen dos artistes inicials.</p>
+      </section>
 
-    <section class="card">
-      <h2>1) Afegir artista</h2>
-      <form id="artist-form">
-        <div>
-          <label for="artist-name">Nom de l'artista</label>
-          <input id="artist-name" name="name" required />
+      <section class="card">
+        <h2>1) Afegir artista</h2>
+        <form id="artist-form">
+          <div>
+            <label for="artist-name">Nom de l'artista</label>
+            <input id="artist-name" name="name" required />
+          </div>
+          <div>
+            <button type="submit">Desar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>2) Consultar artistes</h2>
+        <div class="row">
+          <button id="load-btn" type="button" class="btn-small">
+            Carregar artistes
+          </button>
         </div>
-        <div>
-          <button type="submit">Desar</button>
+        <p id="artist-output">Prem "Carregar artistes" per veure dades.</p>
+      </section>
+
+      <section class="card">
+        <h2>3) Modificar artistes</h2>
+        <div class="row">
+          <select id="dropdownModifyArtist"></select>
+          <div>
+            <label for="artist-new-name">Nou nom de l'artista</label>
+            <input
+              id="artist-new-name"
+              name="name"
+              required
+              placeholder="Introdueix el nou nom del artista"
+            />
+          </div>
+          <button id="modify-btn" type="button" class="btn-small">
+            Modificar artista
+          </button>
         </div>
-      </form>
-    </section>
+      </section>
+      <section class="card">
+        <h2>4) Eliminar artistes</h2>
+        <div class="row">
+          <select id="dropdownDeleteArtist"></select>
 
-    <section class="card">
-      <h2>2) Consultar artistes</h2>
-      <div class="row">
-        <button id="load-btn" type="button" class="btn-small">Carregar artistes</button>
-      </div>
-      <p id="artist-output">Prem "Carregar artistes" per veure dades.</p>
-    </section>
+          <button id="delete-btn" type="button" class="btn-small">
+            Eliminar artista
+          </button>
+        </div>
+      </section>
 
-    <section class="card">
-      <h2>3) Eliminar artistes</h2>
-      <div class="row">
+      <section class="card">
+        <h2>5) Consultar albums</h2>
+        <div class="row">
+          <button id="load-album-btn" type="button" class="btn-small">
+            Carregar album
+          </button>
+        </div>
+        <p id="album-output">Prem "Carregar albums" per veure dades.</p>
+      </section>
 
-        <select id="dropdownDeleteArtist"></select>
-        <button id="delete-btn" type="button" class="btn-small">Eliminar artista</button>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>4) Consultar albums</h2>
-      <div class="row">
-        <button id="load-album-btn" type="button" class="btn-small">Carregar album</button>
-      </div>
-      <p id="album-output">Prem "Carregar albums" per veure dades.</p>
-    </section>
-    
-    <section class="card">
-      <h2>5) Consultar musica</h2>
-      <div class="row">
-        <button id="load-song-btn" type="button" class="btn-small">Carregar artistes</button>
-      </div>
-      <p id="song-output">Prem "Carregar artistes" per veure dades.</p>
-    </section>
-    <!--
+      <section class="card">
+        <h2>6) Consultar musica</h2>
+        <div class="row">
+          <button id="load-song-btn" type="button" class="btn-small">
+            Carregar musica
+          </button>
+        </div>
+        <p id="song-output">Prem "Carregar artistes" per veure dades.</p>
+      </section>
+      <!--
     <section>
       <select name="testAsix" id="Asix1a">
         <option value="op1">op1</option>
       </select>
     </section>
-  -->   
-  </main>
-  <script src="app.js"></script>
-</body>
+  -->
+    </main>
+    <script src="app.js"></script>
+  </body>
 </html>

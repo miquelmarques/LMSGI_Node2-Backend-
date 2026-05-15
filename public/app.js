@@ -1,4 +1,4 @@
-﻿const form = document.getElementById("artist-form");
+const form = document.getElementById("artist-form");
 const loadButton = document.getElementById("load-btn");
 const artistOutput = document.getElementById("artist-output");
 
@@ -9,6 +9,9 @@ const loadAlbumbtn = document.getElementById("load-album-btn");
 const albumOutput = document.getElementById("album-output");
 const loadSongbtn = document.getElementById("load-song-btn");
 const songOutput = document.getElementById("song-output");
+const dropdownModifyArtist = document.getElementById("dropdownModifyArtist");
+const ModifyButton = document.getElementById("modify-btn");
+const artistNewNameInput = document.getElementById("artist-new-name");
 
 
 form.addEventListener("submit", async (event) => {
@@ -106,7 +109,32 @@ loadSongbtn.addEventListener("click", async () =>{
   });
   const json = await res.json();
   songOutput.textContent = JSON.stringify(json.result, null, 2);
-})
+});
+// FUnció per modificar un registre
+dropdownModifyArtist.addEventListener("focus", async () =>{
+  await LoadModifyArtistDropdown();
+});
+
+ModifyButton.addEventListener("click", async () => {
+  const name = dropdownModifyArtist.value;
+  const newname = artistNewNameInput.value.trim();
+  const res = await fetch ("/api/modifyArtist",{
+    method: "POST",
+
+    headers:{
+      "Content-type":"application/json"
+    },
+    body: JSON.stringify({old_name: name, new_name: newname})
+  });
+
+  const message = await res.text();
+  artistOutput.textContent = message;
+  if (res.ok) {
+    artistNewNameInput.value = "";
+    await LoadModifyArtistDropdown();
+    await LoadDeleteArtistDropdown();
+  }
+});
 
 
 
@@ -125,7 +153,7 @@ async function ConsultTable(tableString, campString) {// Consulta de qualsevol t
   });
   const json = await res.json();
   return json.result;
-}
+};
 
 async function LoadDeleteArtistDropdown() { // Recarregar el dropdown amb el artista eliminat.
   dropdownDeleteArtist.innerHTML = "";
@@ -136,7 +164,18 @@ async function LoadDeleteArtistDropdown() { // Recarregar el dropdown amb el art
     option.textContent = artist.name;
     dropdownDeleteArtist.appendChild(option);
   });
-}
+};
+
+async function LoadModifyArtistDropdown() {
+  dropdownModifyArtist.innerHTML = "";
+  let result = await ConsultTable("artists", "name");
+  result.forEach(artist => {
+    let option = document.createElement("option");
+    option.value = artist.name;
+    option.textContent = artist.name;
+    dropdownModifyArtist.appendChild(option);
+  });
+};
 
 
 
